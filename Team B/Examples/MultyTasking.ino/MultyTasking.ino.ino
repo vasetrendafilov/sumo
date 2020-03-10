@@ -13,6 +13,7 @@ void TaskSensorRead(void *pvParameters);
 void setup() {
   xTaskCreate(TaskMotorControl, "Motor control", 128, NULL, 2, NULL);
   xTaskCreate(TaskSensorRead, "Senzori", 128, NULL, 2, NULL);
+  delay(5000);
 }
 
 void loop() {
@@ -42,7 +43,7 @@ void loop() {
  
  void TaskSensorRead(void *pvParameters __attribute__((unused))){
   Serial.begin(9600);
-  for(;;){
+  while(true){
      Serial.println(analogRead(leftIR));
      vTaskDelay(14);
   }  
